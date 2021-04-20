@@ -9,6 +9,7 @@ Plug 'tpope/vim-fugitive'
 "For using Gbrowse in fugitive: "
 Plug 'tpope/vim-rhubarb'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ronakg/quickr-cscope.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'powerline/powerline'
@@ -17,6 +18,9 @@ call plug#end()
 
 " For showing number of line
 set number
+
+" For remapping leader key
+let mapleader = ","
 
 " For showing hidden characters
 set listchars=eol:$,space:.,nbsp:_,tab:>-,trail:~,extends:>,precedes:<
@@ -75,9 +79,12 @@ inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 " For switching between header and implementation file
 map <silent> <C-s> ::CocCommand clangd.switchSourceHeader<CR>
 
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+
 " Use <c-space> to trigger completion
 if &filetype == "python"
-    inoremap <c-space> <C-x><C-u>
+    inoremap <C-space> <C-x><C-u>
 else
-    inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <C-space> coc#refresh()
 endif
